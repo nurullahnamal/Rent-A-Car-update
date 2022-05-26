@@ -29,7 +29,13 @@ namespace Rent_A_Car
         {
             string cümle = "select *from müşteri";
             SqlDataAdapter adtr2 = new SqlDataAdapter();
+           
             dataGridView1.DataSource = araç_Kiralama.listele(adtr2, cümle);
+            dataGridView1.Columns[0].HeaderText = "TC";
+            dataGridView1.Columns[1].HeaderText = "AD SOYAD";
+            dataGridView1.Columns[2].HeaderText = "ADRES";
+            dataGridView1.Columns[3].HeaderText = "TELEFON";
+            dataGridView1.Columns[4].HeaderText = "EMAIL";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -69,6 +75,17 @@ namespace Rent_A_Car
             araç_Kiralama.ekle_sil_güncelle(komut2,cümle);
             YenileListele();
 
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow satır = dataGridView1.CurrentRow;
+            string cümle="delete from müşteri where tc='" + satır.Cells["tc"].Value.ToString() +"'";
+            SqlCommand komut2 = new SqlCommand();
+            
+            //foreach (Control item in Controls) if (item is TextBox) item.Text = "";
+            araç_Kiralama.ekle_sil_güncelle(komut2, cümle);
+            YenileListele();
         }
     }
 }
